@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DotNetLessons.Services
+{
+    public class GrandGreeter : IGreeter
+    {
+        public string Greet(string name)
+        {
+            switch (CultureInfo.CurrentCulture.ToString())
+            {
+                case "ru-RU":
+                    return "Привет " + name + ", ты мой друг";
+                case "ro-MD":
+                    return "Salut " + name + ", tu esti prietenul meu";
+                default:
+                    return "Hello " + name + ", you're my friend";
+            }
+        }
+    }
+}
