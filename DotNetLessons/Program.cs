@@ -2,6 +2,8 @@ using DotNetLessons.Middlewares;
 using DotNetLessons.Services;
 using DotNetLessons.Services.MapRoutes;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace DotNetLessons
 {
@@ -79,6 +81,7 @@ namespace DotNetLessons
             //app.UseFileServer();
 
             /// Using system routing
+            app.UseRouting();
             //app.MapControllers();
             //app.Map("/", async (context) =>
             //{
@@ -86,22 +89,45 @@ namespace DotNetLessons
             //    await context.Response.SendFileAsync(@"wwwroot/index.html");
 
             //});
+            /// Using a ResultsAPI 
+            Results.Ok();
+
             app.Use(async (context, next) =>
             {
                 Console.WriteLine("Custom anonym middleware is starting!");
+                context.Items.Add("Message", "Hello to all");
+
                 await next.Invoke(context);
                 Console.WriteLine("Custom anonym middleware is stoped!");
             });
 
-            app.Map("/", () => Console.WriteLine("Hello from index page"));
 
+            app.MapGet("/", async (context) =>
+            {
+                if (context.Request.Cookies.ContainsKey("Name"))
+                {
+                    var name = context.Request.Cookies["Name"];
+                    await context.Response.WriteAsync(" Hello from index page Mister " + name);
+                    Console.WriteLine($"Hello from index page Mister {name}");
+                }
+                else
+                {
+                    context.Response.Cookies.Append("Name", "Batya");
+                    await context.Response.WriteAsync(" Hello from index");
+                }
+            });
             app.Use(async (context, next) =>
             {
                 Console.WriteLine("Custom anonym middleware 2 is starting!");
+                context.Items.Add("Message2", "Hello to all peoples");
                 await next.Invoke(context);
                 Console.WriteLine("Custom anonym middleware 2 is stoped!");
             });
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.Map("/112", async context => await context.Response.WriteAsync("Hello, World!"));
+            });
             /// Adding dynamic configuration
             app.Configuration["Place"] = "Moldcell";
             app.Configuration["TimeNow"] = DateTime.Now.ToString();
@@ -110,7 +136,7 @@ namespace DotNetLessons
 
             /// Access peoples from json files
             app.Map("/tom", (IConfiguration config) => ($"Name: {config["Name"]} - Age:{config["Age"]} - WorkPlace:{config["WorkPlace"]}"));
-            app.Map("/person", (IConfiguration config) => $"Name: {config["person:profile:name"]} - Company: {config["company:name"]}") ;
+            app.Map("/person", (IConfiguration config) => $"Name: {config["person:profile:name"]} - Company: {config["company:name"]}");
             /// Use routeRestriction
             app.Map("/house/{code:secretcode(admin)}", (string code) => $"Your code is: '{code}'. Welcome to house");
             app.Map("/greet", (SimpleGreeter greeter) => $"{greeter.Greet("Tom Holland")} Welcome");
