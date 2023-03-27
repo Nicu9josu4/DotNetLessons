@@ -1,7 +1,16 @@
 ﻿namespace DotNetLessons.Services.MapRoutes
 {
-    public class RouteMapConstraint
+    public class SecretCodeConstraint : IRouteConstraint
     {
-        
+        string _secretCode;    // допустимый код
+        public SecretCodeConstraint(string secretCode)
+        {
+            _secretCode = secretCode;
+        }
+
+        public bool Match(HttpContext? httpContext, IRouter? route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
+        {
+            return values[routeKey]?.ToString() == _secretCode;
+        }
     }
 }

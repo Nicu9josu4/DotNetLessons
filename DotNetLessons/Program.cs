@@ -20,11 +20,13 @@ namespace DotNetLessons
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
             // Add services to the container.
             builder.Services.AddTransient<IGreeter, SimpleGreeter>();
             builder.Services.AddTransient<IGreeter, GrandGreeter>();
 
+            /// Adaugarea unei restrictii pentru utilizarea Map
+            builder.Services.Configure<RouteOptions>(options =>
+                options.ConstraintMap.Add("secretcode", typeof(SecretCodeConstraint)));
             //builder.Services.AddTransient<GreeterWithConstructorService>();
             //builder.Services.AddTransient<GreeterWithPropertyService>();
             //builder.Services.AddTransient<GreeterWithMethodService>();
@@ -70,20 +72,20 @@ namespace DotNetLessons
             app.UseDeveloperExceptionPage();
 
             /// Using middlewares
-            app.UseGreetingMiddleware();
+            //app.UseGreetingMiddleware();
             app.UseHttpLogging();
 
             /// Using a static files
             //app.UseFileServer();
 
             /// Using system routing
-            app.MapControllers();
-            app.Map("/", async (context) =>
-            {
-                context.Response.ContentType = "text/html";
-                await context.Response.SendFileAsync(@"wwwroot/index.html");
+            //app.MapControllers();
+            //app.Map("/", async (context) =>
+            //{
+            //    context.Response.ContentType = "text/html";
+            //    await context.Response.SendFileAsync(@"wwwroot/index.html");
 
-            });
+            //});
             app.Use(async (context, next) =>
             {
                 Console.WriteLine("Custom anonym middleware is starting!");
@@ -91,20 +93,27 @@ namespace DotNetLessons
                 Console.WriteLine("Custom anonym middleware is stoped!");
             });
 
+            app.Map("/", () => Console.WriteLine("Hello from index page"));
+
             app.Use(async (context, next) =>
             {
                 Console.WriteLine("Custom anonym middleware 2 is starting!");
                 await next.Invoke(context);
                 Console.WriteLine("Custom anonym middleware 2 is stoped!");
             });
+
+            /// Adding dynamic configuration
             app.Configuration["Place"] = "Moldcell";
             app.Configuration["TimeNow"] = DateTime.Now.ToString();
+
             app.Map("/anonimConfig", (IConfiguration config) => ($"Place: {config["Place"]} - Time: {config["TimeNow"]}"));
 
-            ///Access peoples from json files
+            /// Access peoples from json files
             app.Map("/tom", (IConfiguration config) => ($"Name: {config["Name"]} - Age:{config["Age"]} - WorkPlace:{config["WorkPlace"]}"));
-            app.Map("/person", (IConfiguration config) => ($"Name: {config["person:profile:name"]} - Company: {config["company:name"]}"));
-
+            app.Map("/person", (IConfiguration config) => $"Name: {config["person:profile:name"]} - Company: {config["company:name"]}") ;
+            /// Use routeRestriction
+            app.Map("/house/{code:secretcode(admin)}", (string code) => $"Your code is: '{code}'. Welcome to house");
+            app.Map("/greet", (SimpleGreeter greeter) => $"{greeter.Greet("Tom Holland")} Welcome");
             app.Run();
         }
     }
