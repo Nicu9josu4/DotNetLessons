@@ -2,7 +2,8 @@
 {
     public class SecretCodeConstraint : IRouteConstraint
     {
-        string _secretCode;    // допустимый код
+        private string _secretCode;    // допустимый код
+
         public SecretCodeConstraint(string secretCode)
         {
             _secretCode = secretCode;

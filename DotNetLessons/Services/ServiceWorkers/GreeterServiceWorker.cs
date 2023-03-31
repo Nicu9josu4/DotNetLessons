@@ -1,11 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DotNetLessons.Services.ServiceWorkers
+﻿namespace DotNetLessons.Services.ServiceWorkers
 {
     public class GreeterServiceWorker : IHostedService
     {
@@ -19,7 +12,7 @@ namespace DotNetLessons.Services.ServiceWorkers
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             int i = 1;
-            while (i<=100)
+            while (i <= 100)
             {
                 Console.WriteLine(_greeter.Greet("Tom " + i++));
                 await Task.Delay(10);

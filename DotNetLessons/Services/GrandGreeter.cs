@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
 namespace DotNetLessons.Services
 {
@@ -15,8 +10,10 @@ namespace DotNetLessons.Services
             {
                 case "ru-RU":
                     return "Привет " + name + ", ты мой друг";
+
                 case "ro-MD":
                     return "Salut " + name + ", tu esti prietenul meu";
+
                 default:
                     return "Hello " + name + ", you're my friend";
             }

@@ -1,8 +1,4 @@
-﻿using DotNetLessons.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-
-namespace DotNetLessons.Middlewares
+﻿namespace DotNetLessons.Middlewares
 {
     public class GreetingMiddleware
     {
@@ -29,7 +25,7 @@ namespace DotNetLessons.Middlewares
 
     public static class GreetingMiddlewareExtensions
     {
-        public static IApplicationBuilder UseGreetingMiddleware(this IApplicationBuilder builder) => 
+        public static IApplicationBuilder UseGreetingMiddleware(this IApplicationBuilder builder) =>
             builder.UseMiddleware<GreetingMiddleware>();
     }
 }

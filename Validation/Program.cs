@@ -5,7 +5,7 @@ namespace Validation
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             TestGenerator.TestGen();
 
@@ -14,9 +14,9 @@ namespace Validation
             //CreateUser("", 130, "+0111-111-2345");
             //CreateUser("Bob", 18, "+1111-111-2345");
             //CreateUser("", 130, "+0111-111-2345");
-
         }
-        static void CreateUser(string name, int age, string phone)
+
+        private static void CreateUser(string name, int age, string phone)
         {
             User user = new(name, age, phone);
             var context = new ValidationContext(user);
@@ -34,5 +34,4 @@ namespace Validation
                 Console.WriteLine($"Object has been created. Name: {user.Name}\n PhoneNumber: {user.Phone}\n");
         }
     }
-
 }

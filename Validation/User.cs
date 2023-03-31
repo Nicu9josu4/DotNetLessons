@@ -10,6 +10,7 @@ namespace DotNetLessons.Classes
 
         [Range(1, 100)]
         public int Age { get; set; }
+
         [RegularExpression(@"^\+[1-9]\d{3}-\d{3}-\d{4}$")]
         public string Phone { get; set; }
 

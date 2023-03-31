@@ -53,7 +53,6 @@
             target = 'GetDictionary';
         }
 
-
         $.ajax({
             method: "POST",
             url: "/Handler.ashx",
@@ -216,7 +215,7 @@
                 //    if ($(".PopUpAddVacancyWindow").hasClass("isOpen"))
                 //        $('.PopUpAddVacancyWindow-Behind').removeClass("isOpen");
                 //});
-                //#region Work with vacancies table // Add, Edit, Delete, 
+                //#region Work with vacancies table // Add, Edit, Delete,
                 $('.addVacancies').on('click', function () {
                     $('.PopUpAddVacancyWindow-Behind').show();
                     $('#AddVacancyButton').show();
@@ -281,7 +280,6 @@
                             Description: $('#VacancyDesc').val()
                         },
                         dataType: 'json'
-
                     }) // end ajax
                     window.location.reload();
                 }); // End edit button
@@ -304,8 +302,6 @@
                 $('#ExitFromVacancyWindow').on('click', function () {
                     $('.PopUpAddVacancyWindow-Behind').hide();
                 });
-
-
 
                 $('.editFromVacancyTable').on('click', function () {
                     $('.PopUpAddVacancyWindow-Behind').show();
@@ -336,7 +332,6 @@
                         }// end success
                     }); // end ajax
                 });
-
 
                 //$('.PopUpAddVacancyWindow-Behind').on(click, function () {
                 //    $('.PopUpAddVacancyWindow-Behind').hide();
@@ -375,9 +370,6 @@
                     alert(ID);
                 });
             }//end success
-
-
-
         });
         // end ajax function
     });

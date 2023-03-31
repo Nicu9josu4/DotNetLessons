@@ -15,7 +15,6 @@ namespace DotNetLessons
 {
     public interface IHttpHandler
     {
-
         // true if the System.Web.IHttpHandler instance is reusable; otherwise, false.
         bool IsReusable { get; }
         void ProcessRequest(HttpContext context);
@@ -95,6 +94,7 @@ namespace DotNetLessons
             switch (context.Request["action"])
             {
                 #region Work with vacancies
+
                 case "showVacancies":
                     {
                         response = ShowVacancies();
@@ -132,8 +132,9 @@ namespace DotNetLessons
                         int ID = Convert.ToInt32(context.Request["ID"] ?? string.Empty);
                         response = DeleteVacancy(ID);
                         break;
-                    } 
-                #endregion
+                    }
+
+                #endregion Work with vacancies
 
                 case "setCandidat":
                     {
@@ -168,7 +169,8 @@ namespace DotNetLessons
             context.Response.Write(response);
         }
 
-        #region Work with vacancies 
+        #region Work with vacancies
+
         public string DeleteVacancy(int ID)
         {
             using (OracleConnection conn = new OracleConnection(connectionString))
@@ -284,7 +286,8 @@ namespace DotNetLessons
             }
             return (_json);
         }
-        #endregion
+
+        #endregion Work with vacancies
 
         public string AddCandidat(string VacancyTitle, string Name, string Surname, string Email, string Phone, string LinkCV)
         {
@@ -447,7 +450,7 @@ namespace DotNetLessons
             }
             return (_json);
         }
-        
+
         public string CheckUser(string userName, string userPass)
         {
             string cmdStr = "select * from users where Username = '" + userName + "' and Password = '" + userPass + "'";
