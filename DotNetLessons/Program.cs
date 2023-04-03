@@ -1,5 +1,7 @@
 using DotNetLessons.Services;
 using DotNetLessons.Services.MapRoutes;
+using DotNetLessons;
+using System.Drawing;
 
 namespace DotNetLessons
 {
@@ -14,6 +16,8 @@ namespace DotNetLessons
 
         public static void Main(string[] args)
         {
+            #region Build region
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
@@ -35,9 +39,11 @@ namespace DotNetLessons
             //builder.Services.AddTransient<GreeterWithMethodService>();
 
             /// Configuration
-            builder.Configuration
-                .AddJsonFile("JsonConfigs/person.json")
-                .AddJsonFile("JsonConfigs/tom.json");
+            WorkWithConfigs.BuildConfig(ref builder);
+
+            /// Loggining
+            WorkWithLoggers.BuildLogg(ref builder);
+            #endregion
 
             var app = builder.Build();
 
@@ -86,7 +92,6 @@ namespace DotNetLessons
 
             /// Using middlewares
             //app.UseGreetingMiddleware();
-            app.UseHttpLogging();
             app.UseSession(); // Use Session middleware
 
             /// Using a static files
