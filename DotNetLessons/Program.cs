@@ -2,6 +2,7 @@ using DotNetLessons.Services;
 using DotNetLessons.Services.MapRoutes;
 using DotNetLessons;
 using System.Drawing;
+using DotNetLessons.FileLogger;
 
 namespace DotNetLessons
 {
@@ -39,10 +40,10 @@ namespace DotNetLessons
             //builder.Services.AddTransient<GreeterWithMethodService>();
 
             /// Configuration
-            WorkWithConfigs.BuildConfig(ref builder);
+            WorkWithConfigs.BuildConfig(builder);
 
             /// Loggining
-            WorkWithLoggers.BuildLogg(ref builder);
+            WorkWithLoggers.BuildLogg(builder);
             #endregion
 
             var app = builder.Build();
@@ -93,7 +94,7 @@ namespace DotNetLessons
             /// Using middlewares
             //app.UseGreetingMiddleware();
             app.UseSession(); // Use Session middleware
-
+            WorkWithLoggers.ApplicationLogg(app);
             /// Using a static files
             //app.UseFileServer();
             //app.UseDefaultFiles();
@@ -114,11 +115,11 @@ namespace DotNetLessons
 
             app.Use(async (context, next) =>
             {
-                Console.WriteLine("Custom anonym middleware is starting!");
+                //Console.WriteLine("Custom anonym middleware is starting!");
                 context.Items.Add("Message", "Hello to all");
 
                 await next.Invoke(context);
-                Console.WriteLine("Custom anonym middleware is stoped!");
+                //Console.WriteLine("Custom anonym middleware is stoped!");
             });
 
             app.MapGet("/a", async (context) =>
@@ -138,10 +139,10 @@ namespace DotNetLessons
 
             app.Use(async (context, next) =>
             {
-                Console.WriteLine("Custom anonym middleware 2 is starting!");
+                //Console.WriteLine("Custom anonym middleware 2 is starting!");
                 context.Items.Add("Message2", "Hello to all peoples");
                 await next.Invoke(context);
-                Console.WriteLine("Custom anonym middleware 2 is stoped!");
+                //Console.WriteLine("Custom anonym middleware 2 is stoped!");
             });
 
             app.UseEndpoints(endpoints =>

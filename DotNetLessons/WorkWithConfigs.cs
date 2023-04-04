@@ -7,7 +7,7 @@ namespace DotNetLessons
     public class WorkWithConfigs
     {
         // Work with builder
-        internal static void BuildConfig(ref WebApplicationBuilder? builder)
+        internal static void BuildConfig(WebApplicationBuilder? builder)
         {
             /// Using a IConfigurationRoot 
             var configurationBuilder = new ConfigurationBuilder()
