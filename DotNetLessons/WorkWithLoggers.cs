@@ -6,9 +6,10 @@ namespace DotNetLessons
     public class WorkWithLoggers
     {
         // Work with builder
-        internal static void BuildLogg(WebApplicationBuilder? builder)
+        internal static void BuildLogg(WebApplicationBuilder builder)
         {
-            builder?.Logging.AddFile("Logs/Logger.txt");
+            //builder.Logging.ClearProviders();
+            builder.Logging.AddFile("Logger.txt");
             //builder.Logging.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
         
         }
@@ -20,8 +21,7 @@ namespace DotNetLessons
             /// Utilizarea interfetei ILogger cu categoria WorkWithLoggers
             app.Map("/log", (ILogger<WorkWithLoggers> logger) => // WorkWithLoggers fiind ca tip de date generic
             {                                                    // Reprezinta o categorie, ceea ce va afisa inainte de mesaj, adica Documentul de unde a fost chemata
-                logger.LogTrace("Transmiterea unui mesaj detailat");
-                logger.LogDebug("Logarea unui debug");
+                
                 logger.LogInformation("Logarea informatiei");
                 logger.LogWarning("Logarea unei exceptii minore");
                 logger.LogError("Logarea unei errori");
@@ -30,8 +30,7 @@ namespace DotNetLessons
             /// Utilizarea interfetei ILogger cu categoria Program
             app.Map("/log1", (ILogger<Program> logger) => // WorkWithLoggers fiind ca tip de date generic
             {                                                    // Reprezinta o categorie, ceea ce va afisa inainte de mesaj, adica Documentul de unde a fost chemata
-                logger.LogTrace("Transmiterea unui mesaj detailat");
-                logger.LogDebug("Logarea unui debug");
+                
                 logger.LogInformation("Logarea informatiei");
                 logger.LogWarning("Logarea unei exceptii minore");
                 logger.LogError("Logarea unei errori");
@@ -47,7 +46,7 @@ namespace DotNetLessons
             /// Critical    - LogCritical()     : Nivelul critic de eroare, atunci cand necesita evaluarea lor momentan
             /// None                            : Nivelul care nu necesita de a afisa ceva in loguri
 
-
+            
             /// Utilizarea interfetei ILoggerFactory
             ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
                 builder.AddConsole() // Locatia unde sa fie inregistrate logurile

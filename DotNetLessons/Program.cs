@@ -1,8 +1,7 @@
 using DotNetLessons.Services;
 using DotNetLessons.Services.MapRoutes;
-using DotNetLessons;
-using System.Drawing;
-using DotNetLessons.FileLogger;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace DotNetLessons
 {
@@ -38,12 +37,17 @@ namespace DotNetLessons
             //builder.Services.AddTransient<GreeterWithConstructorService>();
             //builder.Services.AddTransient<GreeterWithPropertyService>();
             //builder.Services.AddTransient<GreeterWithMethodService>();
+            /// Exception handling
+            WorkWithExceptions.BuildException(builder);
 
             /// Configuration
             WorkWithConfigs.BuildConfig(builder);
 
             /// Loggining
             WorkWithLoggers.BuildLogg(builder);
+
+            /// Authorisation and Authentification
+            WorkWithAuthorisationAndAuthentificaion.BuildAuthorisationAndAuthentification(builder);
             #endregion
 
             var app = builder.Build();
@@ -76,32 +80,25 @@ namespace DotNetLessons
                 app.UseSwaggerUI();
             }
 
+
+
+            WorkWithAuthorisationAndAuthentificaion.ApplicationAuthentication(app);
+            WorkWithAuthorisationAndAuthentificaion.ApplicationAuthorization(app);
+            WorkWithLoggers.ApplicationLogg(app);
+            WorkWithExceptions.ApplicationException(app);
+            WorkWithResultsAPI.ApplicationResult(app);
+            WorkWithWebAPI.ApplicationWeb(app);
+            /// Using middlewares
+            app.UseSession(); // Use Session middleware
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
-            app.Environment.EnvironmentName = "Production";
-            /// Using exception handling
-            app.UseDeveloperExceptionPage(); // Catch an exception when Environment is Development
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler(app => app.Run(async context =>
-                {
-                    context.Response.StatusCode = 500;
-                    await context.Response.WriteAsync("Error 500. DivideByZeroException occured!");
-                }));
-            }
-
-            /// Using middlewares
-            //app.UseGreetingMiddleware();
-            app.UseSession(); // Use Session middleware
-            WorkWithLoggers.ApplicationLogg(app);
             /// Using a static files
             //app.UseFileServer();
             //app.UseDefaultFiles();
             app.UseStaticFiles();
 
             /// Using system routing
-            app.UseRouting();
+            //app.UseRouting();
             //app.MapControllers();
             //app.Map("/", async (context) =>
             //{
@@ -110,17 +107,15 @@ namespace DotNetLessons
 
             //});
 
-            /// Using a ResultsAPI
-            Results.Ok();
 
-            app.Use(async (context, next) =>
-            {
-                //Console.WriteLine("Custom anonym middleware is starting!");
-                context.Items.Add("Message", "Hello to all");
+            //app.Use(async (context, next) =>
+            //{
+            //    //Console.WriteLine("Custom anonym middleware is starting!");
+            //    context.Items.Add("Message", "Hello to all");
 
-                await next.Invoke(context);
-                //Console.WriteLine("Custom anonym middleware is stoped!");
-            });
+            //    await next.Invoke(context);
+            //    //Console.WriteLine("Custom anonym middleware is stoped!");
+            //});
 
             app.MapGet("/a", async (context) =>
             {
@@ -137,19 +132,19 @@ namespace DotNetLessons
                 }
             });
 
-            app.Use(async (context, next) =>
-            {
-                //Console.WriteLine("Custom anonym middleware 2 is starting!");
-                context.Items.Add("Message2", "Hello to all peoples");
-                await next.Invoke(context);
-                //Console.WriteLine("Custom anonym middleware 2 is stoped!");
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    //Console.WriteLine("Custom anonym middleware 2 is starting!");
+            //    context.Items.Add("Message2", "Hello to all peoples");
+            //    await next.Invoke(context);
+            //    //Console.WriteLine("Custom anonym middleware 2 is stoped!");
+            //});
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapGet("/112", async context => await context.Response.WriteAsync("Hello, World!"));
-            });
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //    endpoints.MapGet("/112", async context => await context.Response.WriteAsync("Hello, World!"));
+            //});
 
             /// Adding dynamic configuration
             app.Configuration["Place"] = "Moldcell";
@@ -187,13 +182,7 @@ namespace DotNetLessons
                 var paths = string.Join("\n", endpointSources.SelectMany(source => source.Endpoints));
                 context.Response.WriteAsync(paths);
             });
-            /// Use Exception handler methods
-            app.MapGet("/getException", async context =>
-            {
-                int a = 10;
-                int b = 0;
-                await context.Response.WriteAsync($"{a / b}");
-            });
+
 
             //app.Run(async context =>
             //{
@@ -203,9 +192,9 @@ namespace DotNetLessons
             //});
 
 
-            app.Run(async context =>
-                await context.Response.WriteAsync("Go to home writing '/'")
-            );
+            //app.Run(async context =>
+            //    await context.Response.WriteAsync("Go to home writing '/'")
+            //);
 
             app.Run();
         }
@@ -220,4 +209,5 @@ namespace DotNetLessons
 
         public static string PrintStaticUser() => $"Satic Name + Static password";
     }
+
 }
