@@ -11,7 +11,7 @@ namespace DotNetLessons
         // Work with builder
         internal static void BuildLogg(WebApplicationBuilder builder)
         {
-            builder.Services.AddLogging();
+            //builder.Services.AddLogging();
             //builder.Logging.ClearProviders();
             builder.Logging.AddFile("Logger.txt");
             //builder.Services.AddHttpLogging(logg => { });
@@ -66,15 +66,56 @@ namespace DotNetLessons
                 await context.Response.WriteAsync($"{context.Request.Path}");
             });
 
-            app.Map("/log2", (ILogger logger) =>
-            {
-
-            });
 
             app.Map("/greet7", (ILogger<Program> logger) => logger.LogInformation("Heello")); // Work
             app.Map("/greet8", (ILogger<Program> logger) => logger.LogError("Logarea unei Erori")); // Work
+
+            app.Logger.LogInformation($"{nameof(WorkWithLoggers)} + Used with App.Logger");
+            app.Map("/log2", context =>
+            {
+                ILoggerFactory logFactory = LoggerFactory.Create(builder => 
+                    builder.AddConsole()
+                );
+                LogClass2 logClass = new (logFactory);
+                logClass.Log("LogInformation");
+                return context.Response.WriteAsync("hello world");
+            });
             /// Utilizarea Middleware-ului UseHttpLoggining
             app.UseHttpLogging(); /// -> Vezi in appsettings.Development.json ????????
+        }
+    }
+    public class LogClass
+    {
+        private readonly ILogger _logger;
+
+        public LogClass(ILogger<LogClass> logger)
+        {
+            _logger = logger;
+        }
+        public void Log(string message)
+        {
+            _logger.LogInformation(message);
+        }
+        public void LogError(string message)
+        {
+            _logger.LogError(message);
+        }
+    }
+    public class LogClass2
+    {
+        private readonly ILogger _logger;
+
+        public LogClass2(ILoggerFactory factorylogger)
+        {
+            _logger = factorylogger.CreateLogger<LogClass2>();
+        }
+        public void Log(string message)
+        {
+            _logger.LogInformation(message);
+        }
+        public void LogError(string message)
+        {
+            _logger.LogError(message);
         }
     }
 }

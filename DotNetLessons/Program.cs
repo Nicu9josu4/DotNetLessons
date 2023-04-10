@@ -193,39 +193,6 @@ namespace DotNetLessons
             logger.LogInformation("Messaj de informare din FileLoger");
         }
     }
-    public class LogClass
-    {
-        private readonly ILogger _logger;
-
-        public LogClass(ILogger logger)
-        {
-            _logger = logger;
-        }
-        public void Log(string message)
-        {
-            _logger.LogInformation(message);
-        }
-        public void LogError(string message)
-        {
-            _logger.LogError(message);
-        }
-    }
-    public class LogClass2
-    {
-        private readonly ILogger _logger;
-
-        public LogClass2(ILoggerFactory factorylogger)
-        {
-            _logger = factorylogger.CreateLogger("Program");
-        }
-        public void Log(string message)
-        {
-            _logger.LogInformation(message);
-        }
-        public void LogError(string message)
-        {
-            _logger.LogError(message);
-        }
-    }
+    
 
 }
