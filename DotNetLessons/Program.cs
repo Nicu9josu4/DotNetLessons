@@ -1,3 +1,4 @@
+using DotNetLessons.FileLogger;
 using DotNetLessons.Services;
 using DotNetLessons.Services.MapRoutes;
 using Microsoft.AspNetCore.Mvc;
@@ -81,12 +82,14 @@ namespace DotNetLessons
             }
 
 
-            WorkWithAuthorisationAndAuthentificaion.ApplicationAuthentication(app);
-            WorkWithAuthorisationAndAuthentificaion.ApplicationAuthorization(app);
-            WorkWithLoggers.ApplicationLogg(app);
-            WorkWithExceptions.ApplicationException(app);
-            WorkWithResultsAPI.ApplicationResult(app);
-            WorkWithWebAPI.ApplicationWeb(app);
+
+            WorkWithAuthorisationAndAuthentificaion.ApplicationAuthentication(app); // Authentication
+            WorkWithAuthorisationAndAuthentificaion.ApplicationAuthorization(app);  // Authorization
+            WorkWithConfigs.ApplicationConfig(app);                                 // Configuration
+            WorkWithLoggers.ApplicationLogg(app);                                   // Loggining
+            WorkWithExceptions.ApplicationException(app);                           // Exception
+            WorkWithResultsAPI.ApplicationResult(app);                              // Results
+            WorkWithWebAPI.ApplicationWeb(app);                                     // WebAPI 
             /// Using middlewares
             app.UseSession(); // Use Session middleware
             app.UseHttpsRedirection();
@@ -145,19 +148,8 @@ namespace DotNetLessons
             //    endpoints.MapGet("/112", async context => await context.Response.WriteAsync("Hello, World!"));
             //});
 
-            /// Adding dynamic configuration
-            app.Configuration["Place"] = "Moldcell";
-            app.Configuration["TimeNow"] = DateTime.Now.ToString();
-
-            app.Map("/anonimConfig", (IConfiguration config) => ($"Place: {config["Place"]} - Time: {config["TimeNow"]}"));
-
-            /// Access peoples from json files
-            app.Map("/tom", (IConfiguration config) => ($"Name: {config["Name"]} - Age:{config["Age"]} - WorkPlace:{config["WorkPlace"]}"));
-            app.Map("/person", (IConfiguration config) => $"Name: {config["person:profile:name"]} - Company: {config["company:name"]}");
-
             /// Use routeRestriction
             app.Map("/house/{code:secretcode(admin)}", (string code) => $"Your code is: '{code}'. Welcome to house");
-
             /// Probe ale unor errori bazate pe Map
             app.Map("/greet1", (SimpleGreeter greeter) => $"{greeter.Greet("Greeter 1")} Welcome"); // Broken
             app.Map("/greet2", () => $"{greetService.Greet("Greeter 2")} Welcome"); // Work
@@ -165,11 +157,8 @@ namespace DotNetLessons
             app.Map("/greet4", (User user) => $"{user.PrintUser()} Greeter 4 Welcome"); // Broken
             app.Map("/greet5", () => new User().PrintUser() + " Greeter 5"); // Work
             app.Map("/greet6", () => User.PrintStaticUser() + " Greeter 6"); // Work
-            app.Map("/greet7", async (ILogger logger, HttpContext context) =>
-            {
-                logger.LogError("Message Greeter 7");
-                await context.Response.WriteAsync("Greet 7");
-            }); // Work
+            app.Map("/greet7", (ILogger logger) => new LogClass(logger).Log("Logarea unei informatii")); // Work
+            app.Map("/greet8", (ILogger logger) => new LogClass(logger).LogError("Logarea unei Erori")); // Work
 
             /// Use session method
             app.MapGet("/", (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
@@ -212,6 +201,27 @@ namespace DotNetLessons
         public string PrintUser() => $"dynamic Name: {Name} + dynamic Pasword:{Password}";
 
         public static string PrintStaticUser() => $"Satic Name + Static password";
+        public void Logg(ILogger logger)
+        {
+            logger.LogInformation("Messaj de informare din FileLoger");
+        }
+    }
+    public class LogClass
+    {
+        private readonly ILogger _logger;
+
+        public LogClass(ILogger logger)
+        {
+            _logger = logger;
+        }
+        public void Log(string message)
+        {
+            _logger.LogInformation(message);
+        }
+        public void LogError(string message)
+        {
+            _logger.LogError(message);
+        }
     }
 
 }
