@@ -54,7 +54,7 @@
         }
         // Получение одного пользователя
         async function getUser(id) {
-            const response = await fetch(`/api/users/${id}`, {
+            const response = await fetch('/api/users/${id}', {
                 method: "GET",
                 headers: { "Accept": "application/json" }
             });

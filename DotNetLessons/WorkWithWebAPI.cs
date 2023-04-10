@@ -63,10 +63,6 @@
                 return Results.Json(user);
             });
 
-            app.Run();
-
-
-
         }
     }
     public class Person

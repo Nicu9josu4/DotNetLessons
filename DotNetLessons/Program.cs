@@ -31,7 +31,7 @@ namespace DotNetLessons
             /// Adding a Session services:
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession();
-            builder.Services.AddControllers();
+            //builder.Services.AddControllers();
             /// Adaugarea unei restrictii pentru utilizarea Map
             builder.Services.Configure<RouteOptions>(options =>
                 options.ConstraintMap.Add("secretcode", typeof(SecretCodeConstraint)));

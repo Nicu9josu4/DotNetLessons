@@ -71,6 +71,7 @@ namespace DotNetLessons
             app.Map("/greet8", (ILogger<Program> logger) => logger.LogError("Logarea unei Erori")); // Work
 
             app.Logger.LogInformation($"{nameof(WorkWithLoggers)} + Used with App.Logger");
+
             app.Map("/log2", context =>
             {
                 ILoggerFactory logFactory = LoggerFactory.Create(builder => 
