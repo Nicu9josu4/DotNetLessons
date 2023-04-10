@@ -8,7 +8,7 @@
         }
         internal static void ApplicationException(WebApplication app)
         {
-            app.Environment.EnvironmentName = "Production";
+            //app.Environment.EnvironmentName = "Production";
 
             /// Using exception handling
             app.UseDeveloperExceptionPage(); // Catch an exception when Environment is Development

@@ -31,7 +31,7 @@ namespace DotNetLessons
             /// Adding a Session services:
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession();
-            builder.Services.AddLogging();
+            builder.Services.AddControllers();
             /// Adaugarea unei restrictii pentru utilizarea Map
             builder.Services.Configure<RouteOptions>(options =>
                 options.ConstraintMap.Add("secretcode", typeof(SecretCodeConstraint)));
@@ -157,8 +157,8 @@ namespace DotNetLessons
             app.Map("/greet4", (User user) => $"{user.PrintUser()} Greeter 4 Welcome"); // Broken
             app.Map("/greet5", () => new User().PrintUser() + " Greeter 5"); // Work
             app.Map("/greet6", () => User.PrintStaticUser() + " Greeter 6"); // Work
-            app.Map("/greet7", (ILogger logger) => new LogClass(logger).Log("Logarea unei informatii")); // Work
-            app.Map("/greet8", (ILogger logger) => new LogClass(logger).LogError("Logarea unei Erori")); // Work
+
+            
 
             /// Use session method
             app.MapGet("/", (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
@@ -175,19 +175,6 @@ namespace DotNetLessons
                 var paths = string.Join("\n", endpointSources.SelectMany(source => source.Endpoints));
                 context.Response.WriteAsync(paths);
             });
-
-
-            //app.Run(async context =>
-            //{
-            //    int a = 10;
-            //    int b = 0;
-            //    await context.Response.WriteAsync($"{a / b}");
-            //});
-
-
-            //app.Run(async context =>
-            //    await context.Response.WriteAsync("Go to home writing '/'")
-            //);
 
             app.Run();
         }
@@ -213,6 +200,23 @@ namespace DotNetLessons
         public LogClass(ILogger logger)
         {
             _logger = logger;
+        }
+        public void Log(string message)
+        {
+            _logger.LogInformation(message);
+        }
+        public void LogError(string message)
+        {
+            _logger.LogError(message);
+        }
+    }
+    public class LogClass2
+    {
+        private readonly ILogger _logger;
+
+        public LogClass2(ILoggerFactory factorylogger)
+        {
+            _logger = factorylogger.CreateLogger("Program");
         }
         public void Log(string message)
         {
