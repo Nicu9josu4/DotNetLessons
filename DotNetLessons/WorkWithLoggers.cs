@@ -11,7 +11,7 @@ namespace DotNetLessons
         // Work with builder
         internal static void BuildLogg(WebApplicationBuilder builder)
         {
-            //builder.Services.AddLogging();
+            builder.Services.AddLogging();
             //builder.Logging.ClearProviders();
             builder.Logging.AddFile("Logger.txt");
             //builder.Services.AddHttpLogging(logg => { });
@@ -82,7 +82,7 @@ namespace DotNetLessons
                 return context.Response.WriteAsync("hello world");
             });
             /// Utilizarea Middleware-ului UseHttpLoggining
-            app.UseHttpLogging(); /// -> Vezi in appsettings.Development.json ????????
+            //app.UseHttpLogging(); /// -> Vezi in appsettings.Development.json ????????
         }
     }
     public class LogClass
