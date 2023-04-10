@@ -30,7 +30,7 @@ namespace DotNetLessons
             /// Adding a Session services:
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession();
-
+            builder.Services.AddLogging();
             /// Adaugarea unei restrictii pentru utilizarea Map
             builder.Services.Configure<RouteOptions>(options =>
                 options.ConstraintMap.Add("secretcode", typeof(SecretCodeConstraint)));
@@ -79,7 +79,6 @@ namespace DotNetLessons
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
 
 
             WorkWithAuthorisationAndAuthentificaion.ApplicationAuthentication(app);
@@ -166,6 +165,11 @@ namespace DotNetLessons
             app.Map("/greet4", (User user) => $"{user.PrintUser()} Greeter 4 Welcome"); // Broken
             app.Map("/greet5", () => new User().PrintUser() + " Greeter 5"); // Work
             app.Map("/greet6", () => User.PrintStaticUser() + " Greeter 6"); // Work
+            app.Map("/greet7", async (ILogger logger, HttpContext context) =>
+            {
+                logger.LogError("Message Greeter 7");
+                await context.Response.WriteAsync("Greet 7");
+            }); // Work
 
             /// Use session method
             app.MapGet("/", (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
