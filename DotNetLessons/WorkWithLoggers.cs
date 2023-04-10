@@ -21,7 +21,6 @@ namespace DotNetLessons
             /// Utilizarea interfetei ILogger cu categoria WorkWithLoggers
             app.Map("/log", (ILogger<WorkWithLoggers> logger) => // WorkWithLoggers fiind ca tip de date generic
             {                                                    // Reprezinta o categorie, ceea ce va afisa inainte de mesaj, adica Documentul de unde a fost chemata
-                
                 logger.LogInformation("Logarea informatiei");
                 logger.LogWarning("Logarea unei exceptii minore");
                 logger.LogError("Logarea unei errori");
@@ -30,12 +29,12 @@ namespace DotNetLessons
             /// Utilizarea interfetei ILogger cu categoria Program
             app.Map("/log1", (ILogger<Program> logger) => // WorkWithLoggers fiind ca tip de date generic
             {                                                    // Reprezinta o categorie, ceea ce va afisa inainte de mesaj, adica Documentul de unde a fost chemata
-                
                 logger.LogInformation("Logarea informatiei");
                 logger.LogWarning("Logarea unei exceptii minore");
                 logger.LogError("Logarea unei errori");
                 logger.LogCritical("Logare Criticala");
             });
+
 
             /// Nivelele de logare:
             /// Trace       - LogTrace()        : nivelul care transmite un mesaj cat mai detailat, este bine sa-l folosim atunci cand creem aplicatia dar nu atunci cand deja este gata
@@ -63,7 +62,7 @@ namespace DotNetLessons
             });
 
             /// Utilizarea Middleware-ului UseHttpLoggining
-            //app.UseHttpLogging(); /// -> Vezi in appsettings.Development.json
+            app.UseHttpLogging(); /// -> Vezi in appsettings.Development.json ????????
 
         }
     }

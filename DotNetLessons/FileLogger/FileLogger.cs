@@ -30,5 +30,7 @@
                 File.AppendAllText(_filePath, formatter(state, exception) + Environment.NewLine);
             }
         }
+
+
     }
 }
