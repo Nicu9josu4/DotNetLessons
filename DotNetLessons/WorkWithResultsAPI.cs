@@ -12,6 +12,7 @@
             app.Map("/result/NotFound", () => Results.NotFound("Error 404. Invalid address"));
             app.Map("/result/Unauthorized", () => Results.Unauthorized());
             app.Map("/result/Ok", () => Results.Ok("This is Success"));
+            app.Map("/result/Ok", () => Results.Forbid());
 
             app.Map("/result/oldsite", () => Results.LocalRedirect("/result/newsite")); // Transmiterea userului pe o adresa locala
             //app.Map("/result/oldsite", () => Results.LocalRedirect("https://metanit.com/sharp/aspnet6/10.3.php")); // Error InvalidOperationException: The supplied URL is not local.

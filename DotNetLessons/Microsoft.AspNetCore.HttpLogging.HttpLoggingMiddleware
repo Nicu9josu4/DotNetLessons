@@ -6,7 +6,7 @@ PathBase:
 Path: /
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
+Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,ro;q=0.6,la;q=0.5,ar;q=0.4,eu;q=0.3
 Connection: close
 Host: localhost:44340
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
@@ -28,7 +28,7 @@ PathBase:
 Path: /favicon.ico
 Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
 Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
+Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,ro;q=0.6,la;q=0.5,ar;q=0.4,eu;q=0.3
 Connection: close
 Cookie: [Redacted]
 Host: localhost:44340
@@ -51,7 +51,80 @@ PathBase:
 Path: /log
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
+Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,ro;q=0.6,la;q=0.5,ar;q=0.4,eu;q=0.3
+Connection: close
+Cookie: [Redacted]
+Host: localhost:44340
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+upgrade-insecure-requests: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-user: [Redacted]
+sec-fetch-dest: [Redacted]
+Response:
+StatusCode: 200
+Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /log
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,ro;q=0.6,la;q=0.5,ar;q=0.4,eu;q=0.3
+Cache-Control: no-cache
+Connection: close
+Cookie: [Redacted]
+Host: localhost:44340
+Pragma: [Redacted]
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+upgrade-insecure-requests: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-user: [Redacted]
+sec-fetch-dest: [Redacted]
+Response:
+StatusCode: 200
+Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /log2
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,ro;q=0.6,la;q=0.5,ar;q=0.4,eu;q=0.3
+Cache-Control: no-cache
+Connection: close
+Cookie: [Redacted]
+Host: localhost:44340
+Pragma: [Redacted]
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
+sec-ch-ua: [Redacted]
+sec-ch-ua-mobile: [Redacted]
+sec-ch-ua-platform: [Redacted]
+upgrade-insecure-requests: [Redacted]
+sec-fetch-site: [Redacted]
+sec-fetch-mode: [Redacted]
+sec-fetch-user: [Redacted]
+sec-fetch-dest: [Redacted]
+Response:
+StatusCode: 200
+Request:
+Protocol: HTTP/2
+Method: GET
+Scheme: https
+PathBase: 
+Path: /
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,ro;q=0.6,la;q=0.5,ar;q=0.4,eu;q=0.3
 Connection: close
 Cookie: [Redacted]
 Host: localhost:44340
@@ -74,8 +147,10 @@ PathBase:
 Path: /
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
+Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,ro;q=0.6,la;q=0.5,ar;q=0.4,eu;q=0.3
+Cache-Control: max-age=0
 Connection: close
+Cookie: [Redacted]
 Host: localhost:44340
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
 sec-ch-ua: [Redacted]
@@ -93,60 +168,12 @@ Protocol: HTTP/2
 Method: GET
 Scheme: https
 PathBase: 
-Path: /favicon.ico
-Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
-Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
-Connection: close
-Cookie: [Redacted]
-Host: localhost:44340
-Referer: [Redacted]
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
-sec-ch-ua: [Redacted]
-sec-ch-ua-mobile: [Redacted]
-sec-ch-ua-platform: [Redacted]
-sec-fetch-site: [Redacted]
-sec-fetch-mode: [Redacted]
-sec-fetch-dest: [Redacted]
-Response:
-StatusCode: 404
-Content-Type: text/plain
-Request:
-Protocol: HTTP/2
-Method: GET
-Scheme: https
-PathBase: 
-Path: /
-Accept: */*
-Host: localhost:7267
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
-Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
-Referer: [Redacted]
-sec-ch-ua: [Redacted]
-sec-ch-ua-mobile: [Redacted]
-sec-ch-ua-platform: [Redacted]
-sec-fetch-site: [Redacted]
-sec-fetch-mode: [Redacted]
-sec-fetch-dest: [Redacted]
-Response:
-StatusCode: 200
-Date: Mon, 10 Apr 2023 07:02:49 GMT
-Server: Kestrel
-Cache-Control: [Redacted]
-Expires: -1
-Pragma: [Redacted]
-Set-Cookie: [Redacted]
-Request:
-Protocol: HTTP/2
-Method: GET
-Scheme: https
-PathBase: 
-Path: /
+Path: /tom
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
+Accept-Language: en-US,en;q=0.9,ru-RU;q=0.8,ru;q=0.7,ro;q=0.6,la;q=0.5,ar;q=0.4,eu;q=0.3
 Connection: close
+Cookie: [Redacted]
 Host: localhost:44340
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
 sec-ch-ua: [Redacted]
@@ -159,30 +186,4 @@ sec-fetch-user: [Redacted]
 sec-fetch-dest: [Redacted]
 Response:
 StatusCode: 200
-Set-Cookie: [Redacted]
-Cache-Control: [Redacted]
-Pragma: [Redacted]
-Expires: -1
-Request:
-Protocol: HTTP/2
-Method: GET
-Scheme: https
-PathBase: 
-Path: /favicon.ico
-Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
-Accept-Encoding: gzip, deflate, br
-Accept-Language: en-US,en;q=0.9
-Connection: close
-Cookie: [Redacted]
-Host: localhost:44340
-Referer: [Redacted]
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36
-sec-ch-ua: [Redacted]
-sec-ch-ua-mobile: [Redacted]
-sec-ch-ua-platform: [Redacted]
-sec-fetch-site: [Redacted]
-sec-fetch-mode: [Redacted]
-sec-fetch-dest: [Redacted]
-Response:
-StatusCode: 404
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
