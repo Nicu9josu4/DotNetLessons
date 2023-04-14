@@ -3,8 +3,8 @@ internal class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        builder.WebHost.UseUrls("https://[::]:33333");
+        builder.Services.AddControllers();
+        builder.Services.AddHealthChecksUI().AddInMemoryStorage(); 
         // Add services to the container.
 
         var app = builder.Build();
@@ -13,6 +13,13 @@ internal class Program
 
         app.UseHttpsRedirection();
 
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapHealthChecksUI();
+        });
 
         app.Run();
     }

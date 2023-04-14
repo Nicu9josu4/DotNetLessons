@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DotNetLessons\DotNetLessons.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="file.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

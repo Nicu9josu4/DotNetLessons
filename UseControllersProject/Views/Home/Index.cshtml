@@ -1,0 +1,11 @@
+﻿@using UseControllersProject.Models;
+@model IEnumerable<Person>
+
+<h2>People</h2>
+<table class="table">
+    <tr><td>Id</td><td>Name</td><td>Age</td></tr>
+    @foreach (var p in Model)
+    {
+        <tr><td>@p.Id</td><td>@p.Name</td><td>@p.Age</td></tr>
+    }
+</table>

@@ -7,8 +7,10 @@
 <body>
     <h2 id="result"></h2>
     <button id="btn" value="Запрос">Запрос</button>
+    <button id="btn1" value="Запрос">Запрос</button>
 
     <script>const btn = document.getElementById("btn");
+    const btn1 = document.getElementById("btn1");
         const result = document.getElementById("result");
         btn.addEventListener("click", async () => {
 
@@ -19,6 +21,17 @@
         catch (e) {
             result.innerText = e.message;
         }
-        });</script>
+        });
+        btn1.addEventListener("click", async () => {
+
+            try {
+                const response = await fetch("https://localhost:7035/cors");
+                if (response.ok) result.innerText = await response.text();
+            }
+            catch (e) {
+                result.innerText = e.message;
+            }
+        });
+    </script>
 </body>
 </html>

@@ -6,6 +6,7 @@ internal class Program
 
         // Add services to the container.
         builder.Services.AddControllers();
+        builder.Services.AddControllersWithViews(); // Adaugarea controllerilor cu view
         var app = builder.Build();
 
 
@@ -14,12 +15,12 @@ internal class Program
         app.UseHttpsRedirection();
         app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home1}/{action=Index}"
+                pattern: "{controller=Home}/{action=Index}"
             );
-        app.MapControllerRoute(
-                name: "file",
-                pattern: "{controller=GetFile}/{action=Index}"
-            );
+        //app.MapControllerRoute(
+        //        name: "file",
+        //        pattern: "{controller=GetFile}/{action=Index}"
+        //    );
 
         app.Run();
     }
