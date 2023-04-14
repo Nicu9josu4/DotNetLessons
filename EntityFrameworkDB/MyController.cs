@@ -4,15 +4,15 @@ namespace EntityFrameworkDB
 {
     public class MyController : Controller
     {
-        private readonly DatabaseContext _dbContext;
-        public MyController(DatabaseContext context)
+        private readonly ApplicationContext _dbContext;
+        public MyController(ApplicationContext context)
         {
             _dbContext = context;
         }
         IActionResult Index()
         {
-            var entities = _dbContext.Vacancies.ToList();
-            return View(entities);
+            List<Vacancy> vacancies = _dbContext.Vacancies.ToList();
+            return View(vacancies);
         }
     }
 }
