@@ -1,3 +1,5 @@
+using UseMVCProject.Filters;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -5,8 +7,14 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddControllers();
+        //builder.Services.AddControllers();
+        //builder.Services.AddRouting();
         builder.Services.AddControllersWithViews(); // Adaugarea controllerilor cu view
+        //builder.Services.AddMvc(options =>
+        //{
+        //    options.Filters.Add(typeof(GlobalSimpleFilter)); // Adaugarea filtrului la nivel de aplicatie
+        //});
+        //builder.Services.AddScoped<ActionSimpleFilter>();
         var app = builder.Build();
 
 
@@ -15,12 +23,15 @@ internal class Program
         app.UseHttpsRedirection();
         app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}"
+                pattern: "{controller}/{action}"
             );
-        //app.MapControllerRoute(
-        //        name: "file",
-        //        pattern: "{controller=GetFile}/{action=Index}"
-        //    );
+        app.MapDefaultControllerRoute(); // Sau de folosit o metoda imbricata in sistema care deja contine rutarea de mai sus
+
+        app.MapGet("/", (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
+        {
+            var paths = string.Join("\n", endpointSources.SelectMany(source => source.Endpoints));
+            context.Response.WriteAsync(paths);
+        });
 
         app.Run();
     }

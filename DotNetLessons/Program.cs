@@ -2,7 +2,7 @@ using DotNetLessons.FileLogger;
 using DotNetLessons.Services;
 using DotNetLessons.Services.MapRoutes;
 using Microsoft.AspNetCore.Mvc;
-
+using MySqlConnector;
 
 namespace DotNetLessons
 {
@@ -31,6 +31,7 @@ namespace DotNetLessons
             /// Adding a Session services:
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession();
+            builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(builder.Configuration.GetConnectionString("SqlConnection")));
             //builder.Services.AddControllers();
             /// Adaugarea unei restrictii pentru utilizarea Map
             builder.Services.Configure<RouteOptions>(options =>

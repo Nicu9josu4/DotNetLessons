@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Primitives;
+﻿
+
+
+using MySqlConnector;
 
 namespace DotNetLessons
 {
@@ -45,7 +46,9 @@ namespace DotNetLessons
             app.Configuration["Place"] = "Moldcell";
             app.Configuration["TimeNow"] = DateTime.Now.ToString();
 
+
             app.Map("/anonimConfig", (IConfiguration config) => ($"Place: {config["Place"]} - Time: {config["TimeNow"]}"));
+            //app.Map("/sqlConfig", (IConfiguration config));
 
             /// Access peoples from json files
             app.Map("/tom", (IConfiguration config) => ($"Name: {config["Name"]} - Age:{config["Age"]} - WorkPlace:{config["WorkPlace"]}"));
@@ -53,6 +56,4 @@ namespace DotNetLessons
 
         }
     }
-
-
 }

@@ -17,7 +17,6 @@ internal class Program
 
         app.UseHttpsRedirection();
 
-        //app.UseCors(builder => builder.AllowAnyOrigin());
         app.UseCors(builder => builder.AllowAnyOrigin());
 
         app.Map("/", async context => await context.Response.WriteAsync("Hello from corsed project"));

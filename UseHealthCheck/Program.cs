@@ -1,10 +1,18 @@
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
+using TvShop.DatabaseService.HealthChecks;
+
 internal class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllers();
-        builder.Services.AddHealthChecksUI().AddInMemoryStorage(); 
+        builder.Services.AddHealthChecksUI().AddInMemoryStorage();
+        builder.Services.AddHealthChecks()
+            .AddCheck<DatabaseHealthCheck>(nameof(DatabaseHealthCheck))
+            .AddCheck<ConsistencyHealthCheck>(nameof(ConsistencyHealthCheck));
         // Add services to the container.
 
         var app = builder.Build();
@@ -15,10 +23,10 @@ internal class Program
 
         app.UseRouting();
 
-        app.UseEndpoints(endpoints =>
+        app.MapControllers();
+        app.MapHealthChecks("/health", new HealthCheckOptions()
         {
-            endpoints.MapControllers();
-            endpoints.MapHealthChecksUI();
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
 
         app.Run();

@@ -2,7 +2,7 @@
 
 namespace UseControllersProject.Controllers
 {
-    public class GetFile : Controller
+    public class GetFileController : Controller
     {
         public IActionResult Index()
         {

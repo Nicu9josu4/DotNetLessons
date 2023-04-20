@@ -13,17 +13,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerService", "WorkerServ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SourceGenerator", "SourceGenerator\SourceGenerator.csproj", "{D1DDC8BC-FD9E-4D67-B76A-B80D257B140B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkDB", "EntityFrameworkDB\EntityFrameworkDB.csproj", "{0CD22056-BAB0-45CC-95CD-EF7527F17063}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkDB", "EntityFrameworkDB\EntityFrameworkDB.csproj", "{0CD22056-BAB0-45CC-95CD-EF7527F17063}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseHealthCheck", "UseHealthCheck\UseHealthCheck.csproj", "{F213EDAA-9689-487E-A616-5DD8671618DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseHealthCheck", "UseHealthCheck\UseHealthCheck.csproj", "{F213EDAA-9689-487E-A616-5DD8671618DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCorsProject", "UseCorsProject\UseCorsProject.csproj", "{9B2473B1-E01B-4254-8A9C-D9EABF002499}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCorsProject", "UseCorsProject\UseCorsProject.csproj", "{9B2473B1-E01B-4254-8A9C-D9EABF002499}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCorsProjectTest", "UseCorsProjectTest\UseCorsProjectTest.csproj", "{169AA89A-C977-4B71-9950-DBA7940A46CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCorsProjectTest", "UseCorsProjectTest\UseCorsProjectTest.csproj", "{169AA89A-C977-4B71-9950-DBA7940A46CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URLRewritingProject", "URLRewritingProject\URLRewritingProject.csproj", "{10619AD3-BD78-4097-BA48-8E7E730B019A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URLRewritingProject", "URLRewritingProject\URLRewritingProject.csproj", "{10619AD3-BD78-4097-BA48-8E7E730B019A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseControllersProject", "UseControllersProject\UseControllersProject.csproj", "{42081E08-0062-4A3D-BACB-D53248CDBAAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseMVCProject", "UseControllersProject\UseMVCProject.csproj", "{42081E08-0062-4A3D-BACB-D53248CDBAAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitoringHealthCheckObjects", "HealthCheckObjects\MonitoringHealthCheckObjects.csproj", "{996E14C8-5569-438D-907C-3D1FA463720A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{42081E08-0062-4A3D-BACB-D53248CDBAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42081E08-0062-4A3D-BACB-D53248CDBAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42081E08-0062-4A3D-BACB-D53248CDBAAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{996E14C8-5569-438D-907C-3D1FA463720A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996E14C8-5569-438D-907C-3D1FA463720A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996E14C8-5569-438D-907C-3D1FA463720A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996E14C8-5569-438D-907C-3D1FA463720A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using UseControllersProject.Models;
+using UseMVCProject.Filters;
 
 namespace UseControllersProject.Controllers
 {
@@ -21,24 +22,41 @@ namespace UseControllersProject.Controllers
 
 
 
-    //[ApiController]
-    //[Route("api/[controller]")]
-    //public class Home4Controller : Controller
-    //{
-    //    //[HttpGet]
-    //    public string Action()
-    //    {
-    //        //ViewData["Message"] = $"id-ul omului x este: {id}";
-    //        return "Hello";
-    //    }
+    [ApiController]
+    [Route("api/[controller]/[action]")]
+    public class Home4Controller : Controller
+    {
+        //[HttpGet]
+        public string Action()
+        {
+            //ViewData["Message"] = $"id-ul omului x este: {id}";
+            return "Hello from action";
+        }
+        //[HttpGet]
+        public string Get()
+        {
+            //ViewData["Message"] = $"id-ul omului x este: {id}";
+            return "Hello from get";
+        }
 
-    //}
-
+    }
+    [SimpleResourceFilter]
+    //[ControllerSimpleFilter] // Aplicarea filtrului la nivel de controller
     public class Home : Controller
     {
-        public IActionResult Create()
+        [TypeFilter(typeof(ActionSimpleFilter))]    // Aplicarea filtrului la nivel de actiune
+        //[ServiceFilter(typeof(ActionSimpleFilter))] // Necesita adaugarea in servicii a acestui filtru
+        public IActionResult Index()
         {
-            return View();
+            List<Person> people = new()
+            {
+                new Person(1,"Tom", 22),
+                new Person(2,"Bob", 23),
+                new Person(3,"Alice", 22),
+                new Person(4,"Veing", 22),
+            };
+
+            return View(people);
         }
         public string Create(Person person)
         {
@@ -52,7 +70,7 @@ namespace UseControllersProject.Controllers
             }
 
             if (ModelState.IsValid)
-                return $"{person.Name} - {person.Age}";
+                return $"Name: {person.Name} - Age: {person.Age}";
 
             string errorMessages = "";
             // проходим по всем элементам в ModelState
