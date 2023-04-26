@@ -7,10 +7,10 @@ internal class Program
         // Add services to the container.
         //builder.Services.AddCors();
         builder.Services.AddCors(options => options.AddPolicy("TestPolicy", builder => builder
-            .WithOrigins("https://localhost:7022")
+            .WithOrigins("https://localhost:7023")
             .AllowAnyHeader()
             .AllowAnyMethod()
-        ));
+        )); 
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
 using UseMVCProject.Filters;
+using UseMVCProject.Services;
 
 internal class Program
 {
@@ -9,6 +10,7 @@ internal class Program
         // Add services to the container.
         //builder.Services.AddControllers();
         //builder.Services.AddRouting();
+        builder.Services.AddTransient<IGetTimerService, GetTimerService>();
         builder.Services.AddControllersWithViews(); // Adaugarea controllerilor cu view
         //builder.Services.AddMvc(options =>
         //{
@@ -23,7 +25,7 @@ internal class Program
         app.UseHttpsRedirection();
         app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller}/{action}"
+                pattern: "{controller}/{action}/{id?}"
             );
         app.MapDefaultControllerRoute(); // Sau de folosit o metoda imbricata in sistema care deja contine rutarea de mai sus
 

@@ -5,25 +5,26 @@ using UseMVCProject.Filters;
 
 namespace UseControllersProject.Controllers
 {
-    //public class HomeController
-    //{
-    //    public string Index() => "Hello from \"Home1 Controller\" with sufix";
-    //}
-    //public class Home2 : Controller
-    //{
-    //    public string Index() => "Hello from \"Home2 Controller\" with inheritance a Controller class";
-    //}
-    //[Controller]
-    //public class Home3
-    //{
-    //    public string Index() => "Hello from \"Home3 Controller\" with using an atribute";
-    //}
+    public class HomeController
+    {
+        public string Index() => "Hello from \"Home1 Controller\" with sufix";
+    }
+    public class Home2 : Controller
+    {
+        public string Index() => "Hello from \"Home2 Controller\" with inheritance a Controller class";
+    }
+    [Controller]
+    public class Home3
+    {
+        public string Index() => "Hello from \"Home3 Controller\" with using an atribute";
+    }
 
 
 
 
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [NonController]
     public class Home4Controller : Controller
     {
         //[HttpGet]

@@ -11,11 +11,16 @@ namespace TvShop.DatabaseService.HealthChecks
     {
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = new CancellationToken())
         {
+            if (!cancellationToken.IsCancellationRequested)
+            {
+
             bool isHealthy = await IsDatabaseConnectionOkAsync();
 
             return isHealthy
                 ? HealthCheckResult.Healthy("Database connection is OK")
                 : HealthCheckResult.Unhealthy("Database connection ERROR");
+            }
+            return HealthCheckResult.Unhealthy("Mesaj de oprire");
         }
 
         private static Task<bool> IsDatabaseConnectionOkAsync()

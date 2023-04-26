@@ -14,8 +14,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="7.0.5" />
     <PackageReference Include="MySqlConnector" Version="2.2.5" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
     <PackageReference Include="Oracle.EntityFrameworkCore" Version="7.21.9" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+    <PackageReference Include="Postgres.psql" Version="13.4.0.2" />
   </ItemGroup>
 
 </Project>
