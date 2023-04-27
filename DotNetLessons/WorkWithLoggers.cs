@@ -1,8 +1,4 @@
 ﻿using DotNetLessons.FileLogger;
-using Microsoft.AspNetCore.HttpLogging;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace DotNetLessons
 {
@@ -16,8 +12,8 @@ namespace DotNetLessons
             builder.Logging.AddFile("Logger.txt");
             //builder.Services.AddHttpLogging(logg => { });
             //builder.Logging.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
-
         }
+
         // Work with builder
         internal static void ApplicationLogg(WebApplication app)
         {
@@ -40,7 +36,6 @@ namespace DotNetLessons
                 logger.LogCritical("Logare Criticala");
             });
 
-
             /// Nivelele de logare:
             /// Trace       - LogTrace()        : nivelul care transmite un mesaj cat mai detailat, este bine sa-l folosim atunci cand creem aplicatia dar nu atunci cand deja este gata
             /// Debug       - LogDebug()        : Pentru afisarea informatiei ce poate ajuta int timpul creearii aplicatiei
@@ -49,7 +44,6 @@ namespace DotNetLessons
             /// Error       - LogError()        : Este folosit pentru afisarea exceptiilor si erorilor
             /// Critical    - LogCritical()     : Nivelul critic de eroare, atunci cand necesita evaluarea lor momentan
             /// None                            : Nivelul care nu necesita de a afisa ceva in loguri
-
 
             /// Utilizarea interfetei ILoggerFactory
             ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
@@ -66,7 +60,6 @@ namespace DotNetLessons
                 await context.Response.WriteAsync($"{context.Request.Path}");
             });
 
-
             app.Map("/greet7", (ILogger<Program> logger) => logger.LogInformation("Heello")); // Work
             app.Map("/greet8", (ILogger<Program> logger) => logger.LogError("Logarea unei Erori")); // Work
 
@@ -74,10 +67,10 @@ namespace DotNetLessons
 
             app.Map("/log2", context =>
             {
-                ILoggerFactory logFactory = LoggerFactory.Create(builder => 
+                ILoggerFactory logFactory = LoggerFactory.Create(builder =>
                     builder.AddConsole()
                 );
-                LogClass2 logClass = new (logFactory);
+                LogClass2 logClass = new(logFactory);
                 logClass.Log("LogInformation");
                 return context.Response.WriteAsync("hello world");
             });
@@ -85,6 +78,7 @@ namespace DotNetLessons
             //app.UseHttpLogging(); /// -> Vezi in appsettings.Development.json ????????
         }
     }
+
     public class LogClass
     {
         private readonly ILogger _logger;
@@ -93,15 +87,18 @@ namespace DotNetLessons
         {
             _logger = logger;
         }
+
         public void Log(string message)
         {
             _logger.LogInformation(message);
         }
+
         public void LogError(string message)
         {
             _logger.LogError(message);
         }
     }
+
     public class LogClass2
     {
         private readonly ILogger _logger;
@@ -110,10 +107,12 @@ namespace DotNetLessons
         {
             _logger = factorylogger.CreateLogger<LogClass2>();
         }
+
         public void Log(string message)
         {
             _logger.LogInformation(message);
         }
+
         public void LogError(string message)
         {
             _logger.LogError(message);

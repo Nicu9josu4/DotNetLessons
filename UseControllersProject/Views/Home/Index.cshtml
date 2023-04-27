@@ -1,13 +1,30 @@
 ﻿@using UseControllersProject.Models;
 @addTagHelper *, UseMVCProject
 @await Component.InvokeAsync("Timer")
+@*@await Component.InvokeAsync("ItemsViewComponent")*@
 @model IEnumerable<Person>
-
 <h2>People</h2>
 <table class="table">
     <tr><td>Id</td><td>Name</td><td>Age</td></tr>
     @foreach (var p in Model)
     {
         <tr><td>@p.Id</td><td>@p.Name</td><td>@p.Age</td><td><vc:timer></vc:timer></td></tr>
+        p.PrintInfo();
     }
+    <div class="row">
+        <div class="col-md-4">
+            <nav>
+                <ul>
+                    <li><vc:items></vc:items></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </table>
+
+@*
+
+InvalidOperationException: The view 'Components/Items/Default' was not found.
+The following locations were searched: /Views/Home/Components/Items/Default.cshtml /Views/Shared/Components/Items/Default.cshtml
+_ItemsViewComponent
+*@

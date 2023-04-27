@@ -1,35 +1,18 @@
 using EntityFrameworkDB;
+using EntityFrameworkDB.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("SqlConnection");
-//builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(builder.Configuration.GetConnectionString("SqlConnection")));
-
-//builder.Services.AddDbContext<ApplicationContext>(options =>
-//);
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options
     //.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSqlConnection"))
     //.UseMySQL(builder.Configuration.GetConnectionString("SqlConnection"))
     .UseOracle(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
-
-
-//builder.Services.AddDbContext<ApplicationContext>();
-//builder.Services.AddControllers();
-//builder.Services.AddMvc();
-// Add services to the container.
-
 var app = builder.Build();
 app.UseRouting();
 // Configure the HTTP request pipeline.
-
-//app.MapGet("/", async context =>
-//{
-//    var dbContext = context.RequestServices.GetService<ApplicationContext>();
-//    var vacancies = await dbContext?.Vacancies.ToListAsync();
-//    await context.Response.WriteAsJsonAsync(vacancies);
-//});
 
 //app.MapGet("/", (ApplicationContext db) =>
 //{
@@ -48,27 +31,30 @@ app.UseRouting();
 //    return text;
 //});
 
-
 app.MapGet("/AddUser", (ApplicationContext db, HttpContext context) =>
 {
-    db.USERS.Add(new EntityFrameworkDB.Models.Users
+    db.USERS.Add(new Users
     {  // Adaugarea unei date in baza de date
-        USERNAME = "Ion",
-        PASSWORD = "pass",
-        FIRST_NAME = "Ion",
-        LAST_NAME = "Josu",
-        EMAIL = "Ion@mail.ru",
-        STARTDATA = DateTime.Now,
-        ENDDATA = DateTime.Now,
-        ROLEID = 1,
+        Username = "Ion",
+        Password = "pass",
+        FirstName = "Ion",
+        LastName = "Josu",
+        Email = "Ion@mail.ru",
+        StartDate = DateTime.Now,
+        EndDate = DateTime.Now,
+        RoleId = 1,
     });
+    //db.users.Add(new User
+    //{
+    //    Token = "Token"
+    //});
     db.SaveChanges();
     context.Response.Redirect("/");
 });
 app.MapGet("/DeleteUser/{name}", (string name, ApplicationContext db, HttpContext context) =>
 {
     var users = db.USERS.ToList();
-    var entityToDelete = users.Find(user => user.USERNAME == name);
+    var entityToDelete = users.Find(user => user.Username == name);
     db.USERS.Remove(entityToDelete);
     db.SaveChanges();
     context.Response.Redirect("/");
@@ -77,10 +63,16 @@ app.MapGet("/DeleteUser/{name}", (string name, ApplicationContext db, HttpContex
 app.MapGet("/", (ApplicationContext db) =>
 {
     var users = db.USERS.ToList();
+    //var users = db.users.ToList();
     var text = "";
+
+    //foreach (var user in users)
+    //{
+    //    text += $"{user.idUser} - {user.Token} \n";
+    //}
     foreach (var user in users)
     {
-        text += $"{user.USERNAME} - {user.EMAIL} \n";
+        text += $"{user.Username} - {user.Email} \n";
     }
     return Results.Text(text);
 });

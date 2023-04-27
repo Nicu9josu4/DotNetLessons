@@ -1,7 +1,5 @@
-using DotNetLessons.FileLogger;
 using DotNetLessons.Services;
 using DotNetLessons.Services.MapRoutes;
-using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 
 namespace DotNetLessons
@@ -50,7 +48,8 @@ namespace DotNetLessons
 
             /// Authorisation and Authentification
             WorkWithAuthorisationAndAuthentificaion.BuildAuthorisationAndAuthentification(builder);
-            #endregion
+
+            #endregion Build region
 
             var app = builder.Build();
 
@@ -82,15 +81,13 @@ namespace DotNetLessons
                 app.UseSwaggerUI();
             }
 
-
-
             WorkWithAuthorisationAndAuthentificaion.ApplicationAuthentication(app); // Authentication
             WorkWithAuthorisationAndAuthentificaion.ApplicationAuthorization(app);  // Authorization
             WorkWithConfigs.ApplicationConfig(app);                                 // Configuration
             WorkWithLoggers.ApplicationLogg(app);                                   // Loggining
             WorkWithExceptions.ApplicationException(app);                           // Exception
             WorkWithResultsAPI.ApplicationResult(app);                              // Results
-            WorkWithWebAPI.ApplicationWeb(app);                                     // WebAPI 
+            WorkWithWebAPI.ApplicationWeb(app);                                     // WebAPI
             /// Using middlewares
             app.UseSession(); // Use Session middleware
             app.UseHttpsRedirection();
@@ -109,7 +106,6 @@ namespace DotNetLessons
             //    await context.Response.SendFileAsync(@"wwwroot/index.html");
 
             //});
-
 
             //app.Use(async (context, next) =>
             //{
@@ -159,8 +155,6 @@ namespace DotNetLessons
             app.Map("/greet5", () => new User().PrintUser() + " Greeter 5"); // Work
             app.Map("/greet6", () => User.PrintStaticUser() + " Greeter 6"); // Work
 
-            
-
             /// Use session method
             app.MapGet("/", (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
             {
@@ -189,11 +183,10 @@ namespace DotNetLessons
         public string PrintUser() => $"dynamic Name: {Name} + dynamic Pasword:{Password}";
 
         public static string PrintStaticUser() => $"Satic Name + Static password";
+
         public void Logg(ILogger logger)
         {
             logger.LogInformation("Messaj de informare din FileLoger");
         }
     }
-    
-
 }

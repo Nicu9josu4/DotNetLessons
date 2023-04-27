@@ -12,7 +12,7 @@ app.UseHttpsRedirection();
 var options = new RewriteOptions()
     .AddRedirect("home[/]?$", "home/index")
     .AddRedirect("(.*)/$", "$1"); // "(.*)/$" - Oricare adresa "$1" - Prima grupa
-    //.AddRewrite("home/index", "home/about", skipRemainingRules: false);
+                                  //.AddRewrite("home/index", "home/about", skipRemainingRules: false);
 
 app.UseRewriter(options);
 
@@ -22,4 +22,3 @@ app.MapGet("/home/index", async context => await context.Response.WriteAsync("He
 app.MapGet("/home/about", async context => await context.Response.WriteAsync("HelloWorld from homeAbout"));
 
 app.Run();
-

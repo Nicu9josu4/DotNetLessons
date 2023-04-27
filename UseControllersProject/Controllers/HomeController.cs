@@ -5,22 +5,20 @@ using UseMVCProject.Filters;
 
 namespace UseControllersProject.Controllers
 {
-    public class HomeController
-    {
-        public string Index() => "Hello from \"Home1 Controller\" with sufix";
-    }
+    //public class HomeController
+    //{
+    //    public string Index() => "Hello from \"Home1 Controller\" with sufix";
+    //}
     public class Home2 : Controller
     {
         public string Index() => "Hello from \"Home2 Controller\" with inheritance a Controller class";
     }
+
     [Controller]
     public class Home3
     {
         public string Index() => "Hello from \"Home3 Controller\" with using an atribute";
     }
-
-
-
 
     [ApiController]
     [Route("api/[controller]/[action]")]
@@ -33,20 +31,19 @@ namespace UseControllersProject.Controllers
             //ViewData["Message"] = $"id-ul omului x este: {id}";
             return "Hello from action";
         }
+
         //[HttpGet]
         public string Get()
         {
             //ViewData["Message"] = $"id-ul omului x este: {id}";
             return "Hello from get";
         }
-
     }
+
     [SimpleResourceFilter]
-    //[ControllerSimpleFilter] // Aplicarea filtrului la nivel de controller
     public class Home : Controller
     {
         [TypeFilter(typeof(ActionSimpleFilter))]    // Aplicarea filtrului la nivel de actiune
-        //[ServiceFilter(typeof(ActionSimpleFilter))] // Necesita adaugarea in servicii a acestui filtru
         public IActionResult Index()
         {
             List<Person> people = new()
@@ -59,6 +56,7 @@ namespace UseControllersProject.Controllers
 
             return View(people);
         }
+
         public string Create(Person person)
         {
             if (person.Age > 110 || person.Age < 0)

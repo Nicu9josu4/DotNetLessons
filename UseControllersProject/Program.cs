@@ -1,4 +1,3 @@
-using UseMVCProject.Filters;
 using UseMVCProject.Services;
 
 internal class Program
@@ -8,26 +7,22 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        //builder.Services.AddControllers();
-        //builder.Services.AddRouting();
         builder.Services.AddTransient<IGetTimerService, GetTimerService>();
         builder.Services.AddControllersWithViews(); // Adaugarea controllerilor cu view
         //builder.Services.AddMvc(options =>
         //{
         //    options.Filters.Add(typeof(GlobalSimpleFilter)); // Adaugarea filtrului la nivel de aplicatie
         //});
-        //builder.Services.AddScoped<ActionSimpleFilter>();
+        //builder.Services.AddScoped<ActionSimpleFilter>(); // Pentru utilizarea atributului ServiceFilter
         var app = builder.Build();
 
-
         // Configure the HTTP request pipeline.
-
         app.UseHttpsRedirection();
         app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller}/{action}/{id?}"
+                pattern: "{controller=Home}/{action=Index}"
             );
-        app.MapDefaultControllerRoute(); // Sau de folosit o metoda imbricata in sistema care deja contine rutarea de mai sus
+        //app.MapDefaultControllerRoute(); // Sau de folosit o metoda imbricata in sistema care deja contine rutarea de mai sus
 
         app.MapGet("/", (IEnumerable<EndpointDataSource> endpointSources, HttpContext context) =>
         {

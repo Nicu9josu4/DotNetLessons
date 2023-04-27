@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URLRewritingProject", "URLR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseMVCProject", "UseControllersProject\UseMVCProject.csproj", "{42081E08-0062-4A3D-BACB-D53248CDBAAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitoringHealthCheckObjects", "HealthCheckObjects\MonitoringHealthCheckObjects.csproj", "{996E14C8-5569-438D-907C-3D1FA463720A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonitoringHealthCheckObjects", "HealthCheckObjects\MonitoringHealthCheckObjects.csproj", "{996E14C8-5569-438D-907C-3D1FA463720A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

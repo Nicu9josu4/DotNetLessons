@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace UseHealthCheck.Controllers
 {
@@ -12,6 +10,7 @@ namespace UseHealthCheck.Controllers
         //{
         //    _services = services;
         //}
+
         [HttpGet("api/StopMonitoring")]
         public IActionResult StopMonitoring()
         {
@@ -22,11 +21,11 @@ namespace UseHealthCheck.Controllers
             //}
             return Ok();
         }
+
         [HttpGet("api/StartMonitoring")]
         public IActionResult StartMonitoring()
         {
             return Ok();
         }
-
     }
 }

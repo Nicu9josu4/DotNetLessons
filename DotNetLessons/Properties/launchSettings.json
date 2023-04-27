@@ -35,7 +35,6 @@
       "launchBrowser": true,
       "launchUrl": "",
       "applicationUrl": "https://localhost:5065"
-      
     },
     "IIS Express": {
       "commandName": "IISExpress",

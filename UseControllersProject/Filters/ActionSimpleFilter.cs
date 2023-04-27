@@ -4,12 +4,13 @@ namespace UseMVCProject.Filters
 {
     public class ActionSimpleFilter : Attribute, IResourceFilter
     {
-        readonly ILogger _logger;
+        private readonly ILogger _logger;
 
         public ActionSimpleFilter(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger("ActionSimpleFilter");
         }
+
         public void OnResourceExecuted(ResourceExecutedContext context)
         {
             _logger.LogInformation($"OnResourceExecuted - {DateTime.Now}");

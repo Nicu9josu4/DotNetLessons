@@ -6,12 +6,10 @@ namespace UseMVCProject.Filters
     {
         public void OnResourceExecuted(ResourceExecutedContext context)
         {
-            
         }
 
         public void OnResourceExecuting(ResourceExecutingContext context)
         {
-            
         }
     }
 }

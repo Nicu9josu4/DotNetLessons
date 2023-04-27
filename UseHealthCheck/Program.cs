@@ -1,23 +1,26 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using TvShop.DatabaseService.HealthChecks;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Text;
+using TvShop.DatabaseService.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 //builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-builder.Services.AddHealthChecksUI()
+builder.Services.AddHealthChecksUI(setup => setup.SetEvaluationTimeInSeconds(int.Parse(builder.Configuration["HealthChecksUI:EvaluationTimeInSeconds"])))
     .AddInMemoryStorage();
 //builder.Services.Configure<HealthChecksUIOptions>(options => options.);
 //builder.Services.AddTransient<DatabaseHealthCheck>();
 builder.Services.AddHealthChecks()
-    .AddCheck<DatabaseHealthCheck>(nameof(DatabaseHealthCheck), tags: new[] {"ready"})
-    .AddCheck<ConsistencyHealthCheck>(nameof(ConsistencyHealthCheck))
-    ;
+    .AddCheck<DatabaseHealthCheck>(nameof(DatabaseHealthCheck))
+    .AddCheck<ConsistencyHealthCheck>(nameof(ConsistencyHealthCheck));
+builder.Services.Configure<HealthCheckServiceOptions>(options =>
+{
+    options.Registrations.Select(content => content.Timeout = TimeSpan.FromSeconds(2));
+});
 // Add services to the container.
 var services = builder.Services;
+
 var app = builder.Build();
 //var serviceProvider = app.Services.GetServices<IServiceCollection>();
 // Configure the HTTP request pipeline.
@@ -44,10 +47,13 @@ app.MapHealthChecks("/health", new HealthCheckOptions()
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
 });
-app.MapGet("healthchecks-ui/stop", (IConfiguration config, HttpContext context) =>
+
+app.MapGet("healthchecks-ui/stop", (HttpContext context) =>
 {
-    app.Configuration["HealthChecksUI:EvaluationTimeInSeconds"] = "1000";
-    context.Response.WriteAsync(app.Configuration["HealthChecksUI:EvaluationTimeInSeconds"]);
+    var service = app.Services.GetService<HealthCheckRegistration>();
+    service.Timeout = TimeSpan.FromSeconds(10);
+    //app.Configuration["HealthChecksUI:EvaluationTimeInSeconds"] = "1000";
+    //context.Response.WriteAsync(app.Configuration["HealthChecksUI:EvaluationTimeInSeconds"]);
     //config["HealthChecksUI:EvaluationTimeInSeconds"] = "1000";
     //var myService = serviceProvider.GetRequiredService<IHealthCheck>();
     //var serviceCollection = serviceProvider.GetService<IServiceCollection>();
@@ -65,7 +71,6 @@ app.MapGet("healthchecks-ui/stop", (IConfiguration config, HttpContext context) 
     //var descriptor = builder.Services.FirstOrDefault(service => service.ServiceType == typeof(IHealthCheck));
     //builder.Services.Remove(descriptor);
     //builder.Services.Remove<IHealthCheck>();
-
 });
 //});
 app.MapHealthChecksUI();

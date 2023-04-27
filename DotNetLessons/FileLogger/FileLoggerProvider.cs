@@ -2,7 +2,8 @@
 {
     public class FileLoggerProvider : ILoggerProvider
     {
-        string _path;
+        private string _path;
+
         public FileLoggerProvider(string path)
         {
             _path = path;
@@ -13,6 +14,7 @@
             return new FileLogger(categoryName);
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        { }
     }
 }

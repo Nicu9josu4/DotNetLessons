@@ -4,8 +4,8 @@
     {
         internal static void BuildException(WebApplicationBuilder? builder)
         {
-
         }
+
         internal static void ApplicationException(WebApplication app)
         {
             //app.Environment.EnvironmentName = "Development";

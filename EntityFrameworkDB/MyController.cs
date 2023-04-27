@@ -1,7 +1,4 @@
-﻿using EntityFrameworkDB.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace EntityFrameworkDB
+﻿namespace EntityFrameworkDB
 {
     //public class MyController : Controller
     //{

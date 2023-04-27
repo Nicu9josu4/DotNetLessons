@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace TvShop.DatabaseService.HealthChecks
 {
     public class DatabaseHealthCheck : IHealthCheck
     {
+        private readonly CancellationTokenSource _cancellationTokenSource = new();
+
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = new CancellationToken())
         {
-            if (!cancellationToken.IsCancellationRequested)
+            if (!_cancellationTokenSource.Token.IsCancellationRequested)
             {
-
-            bool isHealthy = await IsDatabaseConnectionOkAsync();
-
-            return isHealthy
-                ? HealthCheckResult.Healthy("Database connection is OK")
-                : HealthCheckResult.Unhealthy("Database connection ERROR");
+                bool isHealthy = await IsDatabaseConnectionOkAsync();
+                return isHealthy
+                    ? HealthCheckResult.Healthy("Database connection is OK")
+                    : HealthCheckResult.Unhealthy("Database connection ERROR");
             }
             return HealthCheckResult.Unhealthy("Mesaj de oprire");
         }

@@ -41,7 +41,6 @@
 
             app.MapPost("/api/users", (Person user) =>
             {
-
                 // устанавливаем id для нового пользователя
                 user.Id = Guid.NewGuid().ToString();
                 // добавляем пользователя в список
@@ -51,7 +50,6 @@
 
             app.MapPut("/api/users", (Person userData) =>
             {
-
                 // получаем пользователя по id
                 var user = users.FirstOrDefault(u => u.Id == userData.Id);
                 // если не найден, отправляем статусный код и сообщение об ошибке
@@ -62,14 +60,13 @@
                 user.Name = userData.Name;
                 return Results.Json(user);
             });
-
         }
     }
+
     public class Person
     {
         public string Id { get; set; } = "";
         public string Name { get; set; } = "";
         public int Age { get; set; }
     }
-
 }

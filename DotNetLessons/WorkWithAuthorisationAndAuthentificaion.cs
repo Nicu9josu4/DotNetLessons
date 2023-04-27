@@ -10,7 +10,6 @@ namespace DotNetLessons
 {
     public class WorkWithAuthorisationAndAuthentificaion
     {
-
         internal static void BuildAuthorisationAndAuthentification(WebApplicationBuilder builder)
         {
             builder.Services.AddAuthorization(options =>
@@ -18,7 +17,7 @@ namespace DotNetLessons
                 options.AddPolicy("AdminRole", policy => policy.RequireRole("Admin"));
             });
             builder.Services.AddControllersWithViews();
-            
+
             /// Adaugarea autentificatorului pe baza de cookie
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -27,7 +26,7 @@ namespace DotNetLessons
                     options.LoginPath = "/Account/login";
                     options.LogoutPath = "/Account/logout";
                 });
-            
+
             /// Adaugarea autentificatorului pe baza de token
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
              .AddJwtBearer(options =>
@@ -49,6 +48,7 @@ namespace DotNetLessons
         {
             app.UseAuthorization();
         }
+
         internal static void ApplicationAuthentication(WebApplication app)
         {
             app.UseAuthentication();
@@ -67,18 +67,19 @@ namespace DotNetLessons
                     claims: claims,
                     expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-               
+
                 return new JwtSecurityTokenHandler().WriteToken(jwt);
             });
             app.Map("/Accounts", [Authorize(Policy = "AdminRole")] () => new { Message = "Hello" });
-
         }
     }
+
     public class AuthOptions
     {
         public const string ISSUER = "MyAuthServer";  // издатель токена
         public const string AUDIENCE = "MyAuthClient";  // потребитель токена
-        const string KEY = "mysupersecret_secretkey!123";  // ключ для шифрации
+        private const string KEY = "mysupersecret_secretkey!123";  // ключ для шифрации
+
         public static SymmetricSecurityKey GetSymmetricSecurityKey() =>
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(KEY));
     }

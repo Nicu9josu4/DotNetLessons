@@ -10,7 +10,7 @@ internal class Program
             .WithOrigins("https://localhost:7023")
             .AllowAnyHeader()
             .AllowAnyMethod()
-        )); 
+        ));
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -22,7 +22,6 @@ internal class Program
         app.Map("/", async context => await context.Response.WriteAsync("Hello from corsed project"));
 
         app.Map("/cors", () => "Ai accesat datele din Cors").RequireCors("TestPolicy");
-
 
         app.Run();
     }

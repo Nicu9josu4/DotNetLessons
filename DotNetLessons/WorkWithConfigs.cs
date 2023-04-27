@@ -1,16 +1,11 @@
-﻿
-
-
-using MySqlConnector;
-
-namespace DotNetLessons
+﻿namespace DotNetLessons
 {
     public class WorkWithConfigs
     {
         // Work with builder
         internal static void BuildConfig(WebApplicationBuilder builder)
         {
-            /// Using a IConfigurationRoot 
+            /// Using a IConfigurationRoot
             var configurationBuilder = new ConfigurationBuilder()
                 .AddJsonFile("JsonConfigs/person.json", optional: true, reloadOnChange: true)
                 .AddJsonFile("JsonConfigs/tom.json", optional: true, reloadOnChange: true)
@@ -35,17 +30,14 @@ namespace DotNetLessons
             var conn = connectionSection.GetConnectionString("DefaultConnection:");
             /// sau
             var connn = connectionSection["DefaultConnection"];
-
-
         }
+
         // Work with Application
         internal static void ApplicationConfig(WebApplication app)
         {
-
             /// Adding dynamic configuration
             app.Configuration["Place"] = "Moldcell";
             app.Configuration["TimeNow"] = DateTime.Now.ToString();
-
 
             app.Map("/anonimConfig", (IConfiguration config) => ($"Place: {config["Place"]} - Time: {config["TimeNow"]}"));
             //app.Map("/sqlConfig", (IConfiguration config));
@@ -53,7 +45,6 @@ namespace DotNetLessons
             /// Access peoples from json files
             app.Map("/tom", (IConfiguration config) => ($"Name: {config["Name"]} - Age:{config["Age"]} - WorkPlace:{config["WorkPlace"]}"));
             app.Map("/person", (IConfiguration config) => $"Name: {config["person:profile:name"]} - Company: {config["company:name"]}");
-
         }
     }
 }
