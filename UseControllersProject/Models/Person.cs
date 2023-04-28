@@ -31,7 +31,7 @@ namespace UseControllersProject.Models
 
         public string PrintInfo()
         {
-            return $"{Id}. {Name} ({Age})";
+            return $"ID - {Id}. Name: {Name} ({Age})";
         }
     }
 }

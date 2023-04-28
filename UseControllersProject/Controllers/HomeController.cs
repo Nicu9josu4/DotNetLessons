@@ -48,10 +48,10 @@ namespace UseControllersProject.Controllers
         {
             List<Person> people = new()
             {
-                new Person(1,"Tom", 22),
-                new Person(2,"Bob", 23),
-                new Person(3,"Alice", 22),
-                new Person(4,"Veing", 22),
+                new Person("Tom", 22),
+                new Person("Bob", 23),
+                new Person("Alice", 22),
+                new Person("Veing", 22),
             };
 
             return View(people);
