@@ -1,6 +1,6 @@
 ﻿@using UseControllersProject.Models;
 @addTagHelper *, UseMVCProject
-@await Component.InvokeAsync("Timer")
+
 @*@await Component.InvokeAsync("ItemsViewComponent")*@
 @model IEnumerable<Person>
 <h2>People</h2>
@@ -20,6 +20,7 @@
         </div>
     </div>
 </table>
+@await Component.InvokeAsync("Timer")
 
 @*
 

@@ -16,7 +16,7 @@ namespace UseControllersProject.Components
 
         //public string Invoke() => _getTimer.GetTime();
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke() 
         {
             string time = _getTimer.GetTime(); // Send Content to View
             return Content(time);

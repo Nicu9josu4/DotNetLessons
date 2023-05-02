@@ -4,7 +4,7 @@ using UseMVCProject.Controllers;
 
 namespace UseMVCProject.Controllers
 {
-    public class ExceptionFilterController : IExceptionFilter
+    public class ExceptionFilterController : Controller, IExceptionFilter
     {
         public void OnException(ExceptionContext context)
         {

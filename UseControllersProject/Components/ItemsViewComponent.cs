@@ -2,7 +2,7 @@
 
 namespace UseMVCProject.Components
 {
-    public class Items : ViewComponent
+    public class ItemsViewComponent : ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {

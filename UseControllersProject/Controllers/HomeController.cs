@@ -5,10 +5,10 @@ using UseMVCProject.Filters;
 
 namespace UseControllersProject.Controllers
 {
-    //public class HomeController
-    //{
-    //    public string Index() => "Hello from \"Home1 Controller\" with sufix";
-    //}
+    public class Home1Controller
+    {
+        public string Index() => "Hello from \"Home1 Controller\" with sufix";
+    }
     public class Home2 : Controller
     {
         public string Index() => "Hello from \"Home2 Controller\" with inheritance a Controller class";
@@ -21,18 +21,19 @@ namespace UseControllersProject.Controllers
     }
 
     [ApiController]
-    [Route("api/[controller]/[action]")]
-    [NonController]
+    [Route("fgd/[controller]/[action]")]
+    //[NonController]
     public class Home4Controller : Controller
     {
-        //[HttpGet]
+        [HttpGet]
         public string Action()
         {
             //ViewData["Message"] = $"id-ul omului x este: {id}";
             return "Hello from action";
         }
 
-        //[HttpGet]
+        [NonAction]
+        [ActionName("GetUser")]
         public string Get()
         {
             //ViewData["Message"] = $"id-ul omului x este: {id}";
@@ -41,9 +42,11 @@ namespace UseControllersProject.Controllers
     }
 
     [SimpleResourceFilter]
+    // [ControllerSimpleFilter]
     public class Home : Controller
     {
-        [TypeFilter(typeof(ActionSimpleFilter))]    // Aplicarea filtrului la nivel de actiune
+        //[TypeFilter(typeof(ActionSimpleFilter))]    // Aplicarea filtrului la nivel de actiune
+        [ServiceFilter(typeof(ActionSimpleFilter))]    // Aplicarea filtrului la nivel de actiune
         public IActionResult Index()
         {
             List<Person> people = new()
@@ -53,7 +56,6 @@ namespace UseControllersProject.Controllers
                 new Person("Alice", 22),
                 new Person("Veing", 22),
             };
-
             return View(people);
         }
 

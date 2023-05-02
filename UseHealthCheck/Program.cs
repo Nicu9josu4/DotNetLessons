@@ -22,6 +22,7 @@ builder.Services.Configure<HealthCheckServiceOptions>(options =>
 var services = builder.Services;
 
 var app = builder.Build();
+app.Environment.EnvironmentName = "Production";
 //var serviceProvider = app.Services.GetServices<IServiceCollection>();
 // Configure the HTTP request pipeline.
 app.Map("/", async (HttpContext context) =>
@@ -50,10 +51,11 @@ app.MapHealthChecks("/health", new HealthCheckOptions()
 
 app.MapGet("healthchecks-ui/stop", (HttpContext context) =>
 {
-    var service = app.Services.GetService<HealthCheckRegistration>();
-    service.Timeout = TimeSpan.FromSeconds(10);
+    //var service = app.Services.GetService<HealthCheckRegistration>();
+    //service.Timeout = TimeSpan.FromSeconds(10);
+
     //app.Configuration["HealthChecksUI:EvaluationTimeInSeconds"] = "1000";
-    //context.Response.WriteAsync(app.Configuration["HealthChecksUI:EvaluationTimeInSeconds"]);
+    context.Response.WriteAsync(app.Configuration["HealthChecksUI:EvaluationTimeInSeconds"]);
     //config["HealthChecksUI:EvaluationTimeInSeconds"] = "1000";
     //var myService = serviceProvider.GetRequiredService<IHealthCheck>();
     //var serviceCollection = serviceProvider.GetService<IServiceCollection>();

@@ -2,7 +2,7 @@
 
 namespace UseMVCProject.Filters
 {
-    public class ActionSimpleFilter : Attribute, IResourceFilter
+    public class ActionSimpleFilter : Attribute, IActionFilter
     {
         private readonly ILogger _logger;
 
@@ -11,12 +11,12 @@ namespace UseMVCProject.Filters
             _logger = loggerFactory.CreateLogger("ActionSimpleFilter");
         }
 
-        public void OnResourceExecuted(ResourceExecutedContext context)
+        public void OnActionExecuted(ActionExecutedContext context)
         {
             _logger.LogInformation($"OnResourceExecuted - {DateTime.Now}");
         }
 
-        public void OnResourceExecuting(ResourceExecutingContext context)
+        public void OnActionExecuting(ActionExecutingContext context)
         {
             _logger.LogInformation($"OnResourceExecuting - {DateTime.Now}");
         }
